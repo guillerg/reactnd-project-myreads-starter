@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import BookShelfChangerMenu from './BookShelfChangerMenu'
+import Book from './Book'
 
 class ListBooks extends Component {
   static PropTypes= {
-    contacts: PropTypes.array.isRequired
+    books: PropTypes.array.isRequired
   }
   render() {
 
@@ -25,20 +25,7 @@ class ListBooks extends Component {
                 <ol className="books-grid">
                   {books.filter(book=>book.shelf==='currentlyReading').map((book) => (
                     <li key={book.id}>
-                      <div className="book">
-                        <div className="book-top">
-                          <div className="book-cover" style={{
-                            width: 128,height: 193,
-                            //template literals back-ticks
-                            backgroundImage: `url(${book.imageLinks.smallThumbnail})`
-                          }}/>
-                          <BookShelfChangerMenu />
-                        </div>
-                        <div className="book-title">{book.title}</div>
-                        {book.authors.map(author => (
-                          <div key={author} className="book-authors">{author}</div>
-                        ))}
-                      </div>
+                      <Book book={book}/>
                     </li>
                   ))}
                 </ol>
@@ -50,20 +37,7 @@ class ListBooks extends Component {
                 <ol className="books-grid">
                   {books.filter(book=>book.shelf==='wantToRead').map((book) => (
                     <li key={book.id}>
-                      <div className="book">
-                        <div className="book-top">
-                          <div className="book-cover" style={{
-                            width: 128,height: 193,
-                            //template literals back-ticks
-                            backgroundImage: `url(${book.imageLinks.smallThumbnail})`
-                          }}/>
-                          <BookShelfChangerMenu />
-                        </div>
-                        <div className="book-title">{book.title}</div>
-                        {book.authors.map(author => (
-                          <div key={author} className="book-authors">{author}</div>
-                        ))}
-                      </div>
+                      <Book book={book}/>
                     </li>
                   ))}
                 </ol>
@@ -75,20 +49,7 @@ class ListBooks extends Component {
                 <ol className="books-grid">
                   {books.filter(book=>book.shelf==='read').map((book) => (
                     <li key={book.id}>
-                      <div className="book">
-                        <div className="book-top">
-                          <div className="book-cover" style={{
-                            width: 128,height: 193,
-                            //template literals back-ticks
-                            backgroundImage: `url(${book.imageLinks.smallThumbnail})`
-                          }}/>
-                          <BookShelfChangerMenu />
-                        </div>
-                        <div className="book-title">{book.title}</div>
-                        {book.authors.map(author => (
-                          <div key={author} className="book-authors">{author}</div>
-                        ))}
-                      </div>
+                      <Book book={book}/>
                     </li>
                   ))}
                 </ol>
