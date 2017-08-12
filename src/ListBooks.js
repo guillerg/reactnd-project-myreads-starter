@@ -1,9 +1,17 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import BookShelfChangerMenu from './BookShelfChangerMenu'
 
 class ListBooks extends Component {
+  static PropTypes= {
+    contacts: PropTypes.array.isRequired
+  }
   render() {
+
+    //Object destructuring ES6
+    const {contacts} = this.props
+
     return (
       <div className="list-books">
         <div className="list-books-title">
@@ -15,6 +23,7 @@ class ListBooks extends Component {
               <h2 className="bookshelf-title">Currently Reading</h2>
               <div className="bookshelf-books">
                 <ol className="books-grid">
+
                   <li>
                     <div className="book">
                       <div className="book-top">

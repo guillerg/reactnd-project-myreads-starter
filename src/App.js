@@ -7,13 +7,12 @@ import './App.css'
 
 class BooksApp extends Component {
   state = {
-
     books: []
   }
 
   componentDidMount(){
     BooksAPI.getAll().then((books)=>{
-      this.setState({books: books})
+      this.setState({books: books}) //same as ({books})
     })
   }
 
@@ -22,7 +21,9 @@ class BooksApp extends Component {
       <div className="app">
 
         <Route exact path='/' render={() => (
-          <ListBooks />
+          <ListBooks
+            books={this.state.books}
+          />
         )}/>
 
         <Route exact path='/search' render={() => (
