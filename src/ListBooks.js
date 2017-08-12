@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import BookShelfChangerMenu from './BookShelfChangerMenu'
-import * as BooksAPI from './BooksAPI'
 
 class ListBooks extends Component {
   render() {
