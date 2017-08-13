@@ -16,16 +16,25 @@ class BooksApp extends Component {
     })
   }
 
-  changeBookShelf = (book, shelf) => {
-    this.setState((books) => {
-      books : books.books.filter((b) => {
-        if (b.id === book.id){
-          b.shelf = shelf
-        }
-        return b
+  changeBookShelf = (book, newShelf) => {
+    BooksAPI.update(book,newShelf).then(() => {
+    //Call updated list of books
+    //  BooksAPI.getAll().then((books)=>{
+    //    this.setState({books: books})
+    //  })
+    //or update current state's book only
+      this.setState((prevState) => {
+        books:prevState.books.forEach((b) => {
+          if(b.id===book.id){
+            b.shelf = newShelf
+            return b
+          }
+          return b
+        })
       })
     })
   }
+
 
   render() {
     return (
