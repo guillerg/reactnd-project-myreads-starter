@@ -16,6 +16,17 @@ class BooksApp extends Component {
     })
   }
 
+  changeBookShelf = (book, shelf) => {
+    this.setState((books) => {
+      books : books.books.filter((b) => {
+        if (b.id === book.id){
+          b.shelf = shelf
+        }
+        return b
+      })
+    })
+  }
+
   render() {
     return (
       <div className="app">
@@ -23,6 +34,7 @@ class BooksApp extends Component {
         <Route exact path='/' render={() => (
           <ListBooks
             books={this.state.books}
+            onShelfChange={this.changeBookShelf}
           />
         )}/>
 

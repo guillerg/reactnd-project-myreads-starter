@@ -10,7 +10,7 @@ class ListBooks extends Component {
   render() {
 
     //Object destructuring ES6
-    const {books} = this.props
+    const {books, onShelfChange} = this.props
 
     return (
       <div className="list-books">
@@ -25,7 +25,7 @@ class ListBooks extends Component {
                 <ol className="books-grid">
                   {books.filter(book=>book.shelf==='currentlyReading').map((book) => (
                     <li key={book.id}>
-                      <Book book={book}/>
+                      <Book book={book} onShelfChange={onShelfChange}/>
                     </li>
                   ))}
                 </ol>
@@ -37,7 +37,7 @@ class ListBooks extends Component {
                 <ol className="books-grid">
                   {books.filter(book=>book.shelf==='wantToRead').map((book) => (
                     <li key={book.id}>
-                      <Book book={book}/>
+                      <Book book={book} onShelfChange={onShelfChange}/>
                     </li>
                   ))}
                 </ol>
@@ -49,7 +49,7 @@ class ListBooks extends Component {
                 <ol className="books-grid">
                   {books.filter(book=>book.shelf==='read').map((book) => (
                     <li key={book.id}>
-                      <Book book={book}/>
+                      <Book book={book} onShelfChange={onShelfChange}/>
                     </li>
                   ))}
                 </ol>
