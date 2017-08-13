@@ -17,14 +17,14 @@ class BooksApp extends Component {
   }
 
   changeBookShelf = (book, newShelf) => {
-    BooksAPI.update(book,newShelf).then(() => {
+    BooksAPI.update(book,newShelf)
     //Call updated list of books
     //  BooksAPI.getAll().then((books)=>{
     //    this.setState({books: books})
     //  })
     //or update current state's book only
-      this.setState((prevState) => {
-        books:prevState.books.forEach((b) => {
+      this.setState((state) => {
+        books:state.books.forEach((b) => {
           if(b.id===book.id){
             b.shelf = newShelf
             return b
@@ -32,7 +32,7 @@ class BooksApp extends Component {
           return b
         })
       })
-    })
+
   }
 
 
