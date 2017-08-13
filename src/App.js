@@ -18,21 +18,16 @@ class BooksApp extends Component {
 
   changeBookShelf = (book, newShelf) => {
     BooksAPI.update(book,newShelf)
-    //Call updated list of books
-    //  BooksAPI.getAll().then((books)=>{
-    //    this.setState({books: books})
-    //  })
-    //or update current state's book only
-      this.setState((state) => {
-        books:state.books.forEach((b) => {
-          if(b.id===book.id){
-            b.shelf = newShelf
-            return b
-          }
-          return b
-        })
-      })
 
+    this.setState((state) => {
+      books:state.books.forEach((b) => {
+        if(b.id===book.id){
+          b.shelf = newShelf
+          return b
+        }
+        return b
+      })
+    })
   }
 
 
@@ -48,7 +43,10 @@ class BooksApp extends Component {
         )}/>
 
         <Route exact path='/search' render={() => (
-          <SearchBooks />
+          <SearchBooks
+            books={this.state.books}
+            onShelfChange={this.changeBookShelf}
+        />
         )}/>
 
       </div>
