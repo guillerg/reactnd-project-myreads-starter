@@ -17,24 +17,27 @@ class BooksApp extends Component {
   }
 
   changeBookShelf = (book, newShelf) => {
+
+    //Check if book already present
+    const isShelvedBook = this.state.books.find((sb) => sb.id === book.id)
+
+    if(isShelvedBook){
+      isShelvedBook.shelf=newShelf
+    } else {
+      book.shelf = newShelf
+      this.state.books.push(book)
+    }
+
+    this.setState({books: this.state.books})
+
     BooksAPI.update(book,newShelf)
 
-    this.setState((state) => {
-      books:state.books.forEach((b) => {
-        if(b.id===book.id){
-          b.shelf = newShelf
-          return b
-        }
-        return b
-      })
-    })
   }
 
 
   render() {
     return (
       <div className="app">
-
         <Route exact path='/' render={() => (
           <ListBooks
             books={this.state.books}

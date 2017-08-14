@@ -5,7 +5,8 @@ import Book from './Book'
 
 class ListBooks extends Component {
   static PropTypes= {
-    books: PropTypes.array.isRequired
+    books: PropTypes.array.isRequired,
+    onShelfChange: PropTypes.func.isRequired
   }
   render() {
 

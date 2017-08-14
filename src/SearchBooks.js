@@ -8,8 +8,8 @@ import _ from 'lodash'
 
 class SearchBooks extends Component {
   static PropTypes = {
-    onShelfChange: PropTypes.func.isRequired,
-    books: PropTypes.array.isRequired
+    books: PropTypes.array.isRequired,
+    onShelfChange: PropTypes.func.isRequired
   }
 
   state = {
@@ -40,10 +40,22 @@ class SearchBooks extends Component {
     })
   }, 300);
 
-
   render() {
     const { query, foundBooks } = this.state
-    const { onShelfChange } = this.props
+    const { onShelfChange, books } = this.props
+
+    //let matchShelfs = foundBooks.map(fb => {
+    //  fb.shelf = 'none'
+    //  books.map(b=>{
+    //    if(fb.id === b.id){
+    //      fb.shelf = b.shelf
+    //    }
+    //    return b
+    //  })
+    //  return fb
+    // })
+
+    //const alreadyOnShelf = this.props.book.find(book => shelvedBook.id === book.id);
 
     return (
       <div className="search-books">
