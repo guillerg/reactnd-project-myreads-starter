@@ -31,9 +31,7 @@ class BooksApp extends Component {
     this.setState({books: this.state.books})
 
     BooksAPI.update(book,newShelf)
-
   }
-
 
   render() {
     return (
