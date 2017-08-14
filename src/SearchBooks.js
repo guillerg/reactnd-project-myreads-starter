@@ -44,16 +44,17 @@ class SearchBooks extends Component {
     const { query, foundBooks } = this.state
     const { onShelfChange, books } = this.props
 
-    //let matchShelfs = foundBooks.map(fb => {
-    //  fb.shelf = 'none'
-    //  books.map(b=>{
-    //    if(fb.id === b.id){
-    //      fb.shelf = b.shelf
-    //    }
-    //    return b
-    //  })
-    //  return fb
-    // })
+    let matchShelfs = foundBooks.map(fb => {
+      //Check if book already present in prop books
+      const isShelvedBook = books.find((b) => b.id === fb.id)
+
+      if(isShelvedBook){
+        fb.shelf=isShelvedBook.shelf
+      } else {
+        fb.shelf='none'
+      }
+      return fb
+    })
 
     //const alreadyOnShelf = this.props.book.find(book => shelvedBook.id === book.id);
 
@@ -72,7 +73,7 @@ class SearchBooks extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {(foundBooks || []).map((book) => (
+            {(matchShelfs || []).map((book) => (
               <li key={book.id}>
                 <Book book={book} onShelfChange={onShelfChange}/>
               </li>
