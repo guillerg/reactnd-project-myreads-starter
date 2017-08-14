@@ -75,7 +75,7 @@ class SearchBooks extends Component {
           <ol className="books-grid">
             {(matchShelfs || []).map((book) => (
               <li key={book.id}>
-                <Book book={book} onShelfChange={onShelfChange}/>
+                <Book book={book} onShelfChange={onShelfChange} showStatus={book.shelf!=='none'? true:false}/>
               </li>
             ))}
           </ol>

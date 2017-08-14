@@ -4,7 +4,8 @@ import PropTypes from 'prop-types'
 class Book extends Component {
   static PropTypes= {
     book: PropTypes.array.isRequired,
-    onShelfChange: PropTypes.func
+    onShelfChange: PropTypes.func.isRequired,
+    showStatus: PropTypes.bool
   }
 
   handleSelection = (event) => {
@@ -27,6 +28,7 @@ class Book extends Component {
             //template literals back-ticks
             backgroundImage: `url(${(book.imageLinks.smallThumbnail || {})})`
           }}/>
+          <div className="book-shelf-status" style={{ visibility: this.props.showStatus ? 'visible' : 'hidden' }}/>
           <div className="book-shelf-changer">
             <select value={book.shelf} onChange={this.handleSelection}>
               <option value="nones" disabled>Move to...</option>
