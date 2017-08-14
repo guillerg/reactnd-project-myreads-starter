@@ -16,22 +16,14 @@ class BooksApp extends Component {
     })
   }
 
-  changeBookShelf = (book, newShelf) => {
+changeBookShelf = (book, shelf) => {
 
-    //Check if book already present
-    const isShelvedBook = this.state.books.find((sb) => sb.id === book.id)
-
-    if(isShelvedBook){
-      isShelvedBook.shelf=newShelf
-    } else {
-      book.shelf = newShelf
-      this.state.books.push(book)
-    }
-
-    this.setState({books: this.state.books})
-
-    BooksAPI.update(book,newShelf)
-  }
+  book.shelf = shelf;
+  this.setState(prevState => (
+    {books: prevState.books.filter(b => b.id !== book.id).concat(book)}
+  ))
+  BooksAPI.update(book, shelf)
+}
 
   render() {
     return (
