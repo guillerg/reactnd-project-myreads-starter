@@ -2,15 +2,16 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 class Book extends Component {
-  static PropTypes= {
-    book: PropTypes.array.isRequired,
+
+  static propTypes= {
+    book: PropTypes.object.isRequired,
     onShelfChange: PropTypes.func.isRequired,
     showStatus: PropTypes.bool
   }
 
   handleSelection = (event) => {
     event.preventDefault()
-    //event.target.value
+
     if(this.props.onShelfChange){
       this.props.onShelfChange(this.props.book, event.target.value)
     }
@@ -26,7 +27,7 @@ class Book extends Component {
           <div className="book-cover" style={{
             width: 128,height: 193,
             //template literals back-ticks
-            backgroundImage: `url(${(book.imageLinks.smallThumbnail || {})})`
+            backgroundImage: `url(${book.imageLinks&&book.imageLinks.smallThumbnail})`
           }}/>
           <div className="book-shelf-status" style={{ visibility: this.props.showStatus ? 'visible' : 'hidden' }}/>
           <div className="book-shelf-changer">

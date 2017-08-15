@@ -7,7 +7,8 @@ import sortBy from 'sort-by'
 import _ from 'lodash'
 
 class SearchBooks extends Component {
-  static PropTypes = {
+
+  static propTypes = {
     books: PropTypes.array.isRequired,
     onShelfChange: PropTypes.func.isRequired
   }
@@ -18,13 +19,18 @@ class SearchBooks extends Component {
   }
 
   updateQuery(query) {
+    this.setState({
+      query: query
+    });
+
+    if (query.length > 0) {
+      this.search(query);
+    } else {
       this.setState({
-        query: query
-      });
-      //if (query.length > 0) {
-        this.search(query);
-      //}
+        foundBooks: []
+      })
     }
+  }
 
   search = _.debounce(query => {
     BooksAPI.search(query).then((fetch) => {
@@ -33,14 +39,18 @@ class SearchBooks extends Component {
           foundBooks: []
         })
       } else {
-          this.setState({
-            foundBooks: fetch.sort(sortBy('title'))
-          })
+          if(this.state.query.length>0)
+          {
+            this.setState({
+              foundBooks: fetch.sort(sortBy('title'))
+            })
+          }
       }
     })
   }, 300);
 
   render() {
+
     const { query, foundBooks } = this.state
     const { onShelfChange, books } = this.props
 
@@ -55,8 +65,6 @@ class SearchBooks extends Component {
       }
       return fb
     })
-
-    //const alreadyOnShelf = this.props.book.find(book => shelvedBook.id === book.id);
 
     return (
       <div className="search-books">
