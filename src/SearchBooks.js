@@ -4,7 +4,6 @@ import * as BooksAPI from './BooksAPI'
 import PropTypes from 'prop-types'
 import Book from './Book'
 import sortBy from 'sort-by'
-import _ from 'lodash'
 
 class SearchBooks extends Component {
 
@@ -32,22 +31,19 @@ class SearchBooks extends Component {
     }
   }
 
-  search = _.debounce(query => {
+  search = query => {
     BooksAPI.search(query).then((fetch) => {
       if (fetch.error) {
         this.setState({
           foundBooks: []
         })
       } else {
-          if(this.state.query.length>0)
-          {
-            this.setState({
-              foundBooks: fetch.sort(sortBy('title'))
-            })
-          }
+          this.setState({
+            foundBooks: fetch.sort(sortBy('title'))
+        })
       }
     })
-  }, 300);
+  }
 
   render() {
 
